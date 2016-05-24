@@ -5,7 +5,7 @@ Performance benchmark for Node.js maxmind geo lookup libraries.
 
 # Performance
 
-![performance](https://docs.google.com/spreadsheets/d/1ZQvX2nV4NxF3rsnYC06JCbDOhEx33jy3avBnDEcQS3E/pubchart?oid=2131177765&format=interactive)
+![performance](https://docs.google.com/spreadsheets/d/1ZQvX2nV4NxF3rsnYC06JCbDOhEx33jy3avBnDEcQS3E/pubchart?oid=2131177765&format=image)
 
 
 |Library|Relative speed|Operations per second|
