@@ -1,0 +1,27 @@
+{
+  "name": "node-maxmind-benchmark",
+  "version": "1.0.0",
+  "description": "maxmind benchmark",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/runk/node-maxmind-benchmark.git"
+  },
+  "dependencies": {
+    "benchmark": "^2.1.0",
+    "geoip2": "^1.0.3",
+    "maxmind": "^1.0.0",
+    "maxmind-db-reader": "^0.2.1",
+    "mmdb-reader": "^1.0.0"
+  },
+  "author": "Dmitry Shirokov <deadrunk@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/runk/node-maxmind-benchmark/issues"
+  },
+  "homepage": "https://github.com/runk/node-maxmind-benchmark#readme"
+}
