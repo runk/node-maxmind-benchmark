@@ -62,6 +62,15 @@ suite.add('geoip2', {
   }
 });
 
+/******************* jgeoip  ***********************/
+var jgeoip = new (require('jgeoip'))(DB_FILE);
+
+suite.add('jgeoip', {
+  minSamples: 50,
+  fn: function() {
+    jgeoip.getRecord(randip());
+  }
+});
+
 
 suite.run();
-

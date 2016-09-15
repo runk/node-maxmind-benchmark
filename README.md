@@ -10,12 +10,12 @@ Performance benchmark for Node.js maxmind geo lookup libraries.
 
 |Library|Relative speed|Operations per second|
 |-------|:------------:|:-------------------:|
-|[`maxmind`](https://github.com/runk/node-maxmind)|100%|215,238 (±5.85%)|
-|[`mmdb-reader`](https://github.com/gosquared/mmdb-reader)|60.58%|130,389 (±3.40%)|
-|[`geoip2`](https://github.com/davidtsai/node-geoip2)|10.71%|23,059 (±0.64%)|
-|[`maxmind-db-reader`](https://github.com/PaddeK/node-maxmind-db)|1.13%|2,422 (±1.87%)|
+|[`maxmind`](https://github.com/runk/node-maxmind)|100%|290,921 (±5.37%)|
+|[`mmdb-reader`](https://github.com/gosquared/mmdb-reader)|36.30%|105,602 (±47.62%)|
+|[`jgeoip`](https://github.com/jclo/jgeoip)|18.16%|52,842 (±3.51%)|
+|[`geoip2`](https://github.com/davidtsai/node-geoip2)|9.31%|27,071 (±1.78%)|
+|[`maxmind-db-reader`](https://github.com/PaddeK/node-maxmind-db)|1.13%|3,288 (±0.86%)|
+
 
 # License
 MIT
-
-			
