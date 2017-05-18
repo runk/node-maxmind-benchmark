@@ -1,7 +1,9 @@
 # node-maxmind-benchmark
 
 
-Performance benchmark for Node.js maxmind geo lookup libraries.
+Performance benchmark for Node.js Maxmind geo lookup libraries.
+
+*Support current GeoIP2 aka MMDB database format only, legacy GeoIP format is not supported*
 
 # Performance
 
