@@ -3,7 +3,7 @@
 
 Performance benchmark for Node.js Maxmind geo lookup libraries.
 
-*Support current GeoIP2 aka MMDB database format only, legacy GeoIP format is not supported*
+*Supports current GeoIP2 aka MMDB database format only, legacy GeoIP format is not supported*
 
 # Performance
 
@@ -18,6 +18,7 @@ Performance benchmark for Node.js Maxmind geo lookup libraries.
 |[`geoip2`](https://github.com/davidtsai/node-geoip2)|9.31%|27,071 (±1.78%)|
 |[`maxmind-db-reader`](https://github.com/PaddeK/node-maxmind-db)|1.13%|3,288 (±0.86%)|
 
+*Note: benchmark was run under node v7.6.0*
 
 # License
 MIT
