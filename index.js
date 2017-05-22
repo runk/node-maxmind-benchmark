@@ -23,32 +23,32 @@ suite.on('cycle', function(event) {
 
 
 /******************* maxmind ***********************/
-var my = require('maxmind').open(DB_FILE);
+var maxmind = require('maxmind').openSync(DB_FILE);
 
 suite.add('maxmind', {
   minSamples: 50,
   fn: function() {
-    my.get(randip());
+    maxmind.get(randip());
   }
 });
 
 /***************** mmdb-reader *********************/
-var MMDBReader = require('mmdb-reader')(DB_FILE);
+var mmdbReader = require('mmdb-reader')(DB_FILE);
 
 suite.add('mmdb-reader', {
   minSamples: 50,
   fn: function() {
-    MMDBReader.lookup(randip());
+    mmdbReader.lookup(randip());
   }
 });
 
 /************* maxmind-db-reader *******************/
-var mmdbreader = require('maxmind-db-reader').openSync(DB_FILE);
+var maxmindDbReader = require('maxmind-db-reader').openSync(DB_FILE);
 
 suite.add('maxmind-db-reader', {
   minSamples: 50,
   fn: function() {
-    mmdbreader.getGeoDataSync(randip());
+    maxmindDbReader.getGeoDataSync(randip());
   }
 });
 
