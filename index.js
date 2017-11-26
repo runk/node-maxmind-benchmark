@@ -1,76 +1,60 @@
-var path = require('path');
+const path = require('path');
 
-function randip() {
-  return Math.ceil(Math.random() * 254) + '.' +
+const randip = () =>
+  Math.ceil(Math.random() * 254) + '.' +
     Math.ceil(Math.random() * 254) + '.' +
     Math.ceil(Math.random() * 254) + '.' +
     Math.ceil(Math.random() * 254);
-}
 
 
-var DB_FILE = path.join(__dirname, '/GeoLite2-City.mmdb');
+const ips = [];
+let ipi = 0;
+for (let i = 0; i < 1e6; i++) { ips.push(randip()); }
+const getip = () => ips[ipi++];
 
 
-var Benchmark = require('benchmark');
+const DB_FILE = path.join(__dirname, '/GeoLite2-City.mmdb');
 
-var suite = new Benchmark.Suite();
-suite.on('cycle', function(event) {
+
+const Benchmark = require('benchmark');
+
+const suite = new Benchmark.Suite();
+suite.on('cycle', (event) => {
   console.log(String(event.target));
 })
 .on('complete', function() {
   console.log('Fastest is ' + this.filter('fastest').map('name'));
 });
 
+const experiment = (name, fn) => {
+  suite.add(name, { minSamples: 50, fn });
+  ipi = 0;
+};
+
 
 /******************* maxmind ***********************/
-var maxmind = require('maxmind').openSync(DB_FILE);
+const maxmind = require('maxmind').openSync(DB_FILE);
+experiment('maxmind', () => { maxmind.get(getip()); });
 
-suite.add('maxmind', {
-  minSamples: 50,
-  fn: function() {
-    maxmind.get(randip());
-  }
-});
 
 /***************** mmdb-reader *********************/
-var mmdbReader = require('mmdb-reader')(DB_FILE);
+const mmdbReader = require('mmdb-reader')(DB_FILE);
+experiment('mmdb-reader', () => { mmdbReader.lookup(getip()); });
 
-suite.add('mmdb-reader', {
-  minSamples: 50,
-  fn: function() {
-    mmdbReader.lookup(randip());
-  }
-});
 
 /************* maxmind-db-reader *******************/
-var maxmindDbReader = require('maxmind-db-reader').openSync(DB_FILE);
+const maxmindDbReader = require('maxmind-db-reader').openSync(DB_FILE);
+experiment('maxmind-db-reader', () => { maxmindDbReader.getGeoDataSync(getip()); });
 
-suite.add('maxmind-db-reader', {
-  minSamples: 50,
-  fn: function() {
-    maxmindDbReader.getGeoDataSync(randip());
-  }
-});
 
 /******************* geoip2  ***********************/
-var geoip2 = require('geoip2').init(DB_FILE);
+const geoip2 = require('geoip2').init(DB_FILE);
+experiment('geoip2', () => { geoip2.lookupSync(getip()); });
 
-suite.add('geoip2', {
-  minSamples: 50,
-  fn: function() {
-    geoip2.lookupSync(randip());
-  }
-});
 
 /******************* jgeoip  ***********************/
-var jgeoip = new (require('jgeoip'))(DB_FILE);
-
-suite.add('jgeoip', {
-  minSamples: 50,
-  fn: function() {
-    jgeoip.getRecord(randip());
-  }
-});
+const jgeoip = new (require('jgeoip'))(DB_FILE);
+experiment('jgeoip', () => { jgeoip.getRecord(getip()); });
 
 
 suite.run();
