@@ -15,7 +15,7 @@
     "benchmark": "^2.1.1",
     "geoip2": "^1.0.5",
     "jgeoip": "^0.3.0",
-    "maxmind": "^2.2.0",
+    "maxmind": "^2.4.0",
     "maxmind-db-reader": "^0.2.1",
     "mmdb-reader": "^1.1.0"
   },
