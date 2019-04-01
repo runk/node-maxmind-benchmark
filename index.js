@@ -41,11 +41,6 @@ const maxmindDbReader = require('maxmind-db-reader').openSync(DB_FILE);
 experiment('maxmind-db-reader', () => { maxmindDbReader.getGeoDataSync(randip()); });
 
 
-/******************* geoip2  ***********************/
-const geoip2 = require('geoip2').init(DB_FILE);
-experiment('geoip2', () => { geoip2.lookupSync(randip()); });
-
-
 /******************* jgeoip  ***********************/
 const jgeoip = new (require('jgeoip'))(DB_FILE);
 experiment('jgeoip', () => { jgeoip.getRecord(randip()); });

@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "benchmark": "^2.1.1",
-    "geoip2": "^1.0.5",
     "jgeoip": "^0.3.0",
     "maxmind": "^2.4.0",
     "maxmind-db-reader": "^0.2.1",
@@ -25,7 +24,7 @@
     "url": "https://github.com/runk/node-maxmind-benchmark/issues"
   },
   "engines": {
-    "node": "^8.5"
+    "node": "^10"
   },
   "homepage": "https://github.com/runk/node-maxmind-benchmark#readme"
 }
