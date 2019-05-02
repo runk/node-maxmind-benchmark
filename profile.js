@@ -1,51 +1,53 @@
-'use strict';
+const random = require("random-seed").create("maxmind");
+random.initState();
+
+const randip = () =>
+  random(254) + "." + random(254) + "." + random(254) + "." + random(254);
 
 /* eslint-disable no-console */
-var path = require('path');
+var path = require("path");
 
-function randip() {
-  return Math.ceil(Math.random() * 254) + '.' +
-    Math.ceil(Math.random() * 254) + '.' +
-    Math.ceil(Math.random() * 254) + '.' +
-    Math.ceil(Math.random() * 254);
-}
+var DB_FILE = path.join(__dirname, "/GeoLite2-City.mmdb");
 
+var n = 5000000;
 
-var DB_FILE = path.join(__dirname, '/GeoLite2-City.mmdb');
+console.log("> Open Chrome and go to chrome://inspect");
+console.log(
+  "> There should be an inspector connection. Unpause debugger, go to Profiles."
+);
 
+console.profile("build");
 
-var n = 500000;
+(async () => {
+  var my = await require("../node-maxmind").open(DB_FILE);
+  var s = Date.now();
+  console.log("> Running...");
+  for (var i = 0; i < n; i++) {
+    my.findAddressInTree(randip());
+    // 203169 ops/s
+    // 313087 ops/s
+    // 502k ops/s
+    // 507k
 
-// console.profile('build');
+    // my.get(randip())
+    // 120k ops/s
 
-var my = require('../').open(DB_FILE);
-var s = Date.now();
-for (var i = 0; i < n; i++) {
-  my.findAddressInTree(randip());
-  // 203169 ops/s
-  // 313087 ops/s
-  // 502k ops/s
-  // 507k
+    // my.resolveDataPointer(2875603);
+    //36000 ops/s
 
-  // my.get(randip())
-  // 120k ops/s
+    // reader.readData(20772773)
+    // 10000 ops/s
+    // reader.lookup(randip())
+    // 142k ops/s
+    // reader.lookup(randip())
+    // 473k ops/s
+  }
+  var f = Date.now();
 
-  // my.resolveDataPointer(2875603);
-  //36000 ops/s
+  console.log(n, "iterations");
+  console.log(f - s, "ms");
+  console.log(~~(n / ((f - s) / 1000)), "op/sec");
+  console.log(process.memoryUsage());
 
-
-  // reader.readData(20772773)
-  // 10000 ops/s
-  // reader.lookup(randip())
-  // 142k ops/s
-  // reader.lookup(randip())
-  // 473k ops/s
-}
-var f = Date.now();
-
-console.log(n, 'iterations');
-console.log(f - s, 'ms');
-console.log(~~(n / ((f - s) / 1000)), 'op/sec');
-console.log(process.memoryUsage());
-
-// console.profileEnd('build');
+  console.profileEnd("build");
+})();

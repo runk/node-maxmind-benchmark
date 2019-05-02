@@ -1,21 +1,18 @@
 const path = require("path");
+const random = require("random-seed").create("maxmind");
 
+random.initState();
 const randip = () =>
-  Math.ceil(Math.random() * 254) +
-  "." +
-  Math.ceil(Math.random() * 254) +
-  "." +
-  Math.ceil(Math.random() * 254) +
-  "." +
-  Math.ceil(Math.random() * 254);
+  random(254) + "." + random(254) + "." + random(254) + "." + random(254);
 
 const DB_FILE = path.join(__dirname, "/GeoLite2-City.mmdb");
 
 const Benchmark = require("benchmark");
-
 const suite = new Benchmark.Suite();
+
 suite
   .on("cycle", event => {
+    random.initState();
     console.log(String(event.target));
   })
   .on("complete", function() {
