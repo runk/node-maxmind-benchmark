@@ -9,7 +9,7 @@ var path = require("path");
 
 var DB_FILE = path.join(__dirname, "/GeoLite2-City.mmdb");
 
-var n = 5000000;
+var n = 1e7;
 
 console.log("> Open Chrome and go to chrome://inspect");
 console.log(
